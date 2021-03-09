@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "host": "http://shuttlebuspro.bigsqa1.opsmart.cn/api"
+  },
+  "qa": {
+    "host": "http://shuttlebuspro.bigsqa1.opsmart.cn/api"
+  },
+  "prod": {
+    "host": "https://sbp.zh.ooclit.cn/api"
+  }
+}
