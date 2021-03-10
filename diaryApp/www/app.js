@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "fc5405a0298d28f36472";
+/******/ 	var hotCurrentHash = "5631dbc6a9792c6dfffe";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1433,7 +1433,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _rou
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  data: function data() {\n    return {};\n  },\n  mounted: function mounted() {},\n  methods: {\n    onPageBeforeOut: function onPageBeforeOut() {},\n    onPageAfterIn: function onPageAfterIn() {}\n  }\n});\n\n//# sourceURL=webpack:///./src/pages/home.vue?./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_cordovaPlugin_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/cordovaPlugin.js */ \"./src/utils/cordovaPlugin.js\");\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  data: function data() {\n    return {};\n  },\n  mounted: function mounted() {},\n  methods: {\n    onPageBeforeOut: function onPageBeforeOut() {},\n    onPageAfterIn: function onPageAfterIn() {\n      console.log('g');\n    },\n    takePicture: function takePicture() {\n      Object(_utils_cordovaPlugin_js__WEBPACK_IMPORTED_MODULE_0__[\"cameraTakePicture\"])();\n    }\n  }\n});\n\n//# sourceURL=webpack:///./src/pages/home.vue?./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -5117,7 +5117,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _vir
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n    if(true) {\n      // 1615220281405\n      var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ \"./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js\")(module.i, {\"locals\":false});\n      module.hot.dispose(cssReload);\n      module.hot.accept(undefined, cssReload);\n    }\n  \n\n//# sourceURL=webpack:///./node_modules/framework7/css/framework7.bundle.css?");
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n    if(true) {\n      // 1615390313658\n      var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ \"./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js\")(module.i, {\"locals\":false});\n      module.hot.dispose(cssReload);\n      module.hot.accept(undefined, cssReload);\n    }\n  \n\n//# sourceURL=webpack:///./node_modules/framework7/css/framework7.bundle.css?");
 
 /***/ }),
 
@@ -5845,7 +5845,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"f7-page\",\n    {\n      staticClass: \"home-page\",\n      on: {\n        \"page:beforeout\": _vm.onPageBeforeOut,\n        \"page:afterin\": _vm.onPageAfterIn\n      }\n    },\n    [_c(\"div\", [_vm._v(\"hello world\")])]\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/pages/home.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"f7-page\",\n    {\n      staticClass: \"home-page\",\n      on: {\n        \"page:beforeout\": _vm.onPageBeforeOut,\n        \"page:afterin\": _vm.onPageAfterIn\n      }\n    },\n    [\n      _c(\"f7-navbar\", { attrs: { title: \"Home\" } }),\n      _vm._v(\" \"),\n      _c(\"f7-button\", { on: { click: _vm.takePicture } }, [_vm._v(\"相机\")]),\n      _vm._v(\" \"),\n      _c(\"div\", [_vm._v(\"hello world\")]),\n      _vm._v(\" \"),\n      _c(\"img\", { attrs: { id: \"myImage\" } })\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/pages/home.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -5963,7 +5963,7 @@ eval("module.exports = JSON.parse(\"{\\\"dev\\\":{\\\"host\\\":\\\"http://shuttl
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n    if(true) {\n      // 1615220278120\n      var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ \"./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js\")(module.i, {\"locals\":false});\n      module.hot.dispose(cssReload);\n      module.hot.accept(undefined, cssReload);\n    }\n  \n\n//# sourceURL=webpack:///./src/css/app.css?");
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n    if(true) {\n      // 1615390312088\n      var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ \"./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js\")(module.i, {\"locals\":false});\n      module.hot.dispose(cssReload);\n      module.hot.accept(undefined, cssReload);\n    }\n  \n\n//# sourceURL=webpack:///./src/css/app.css?");
 
 /***/ }),
 
@@ -5975,7 +5975,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n    if(true) {\n      // 1615220281797\n      var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ \"./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js\")(module.i, {\"locals\":false});\n      module.hot.dispose(cssReload);\n      module.hot.accept(undefined, cssReload);\n    }\n  \n\n//# sourceURL=webpack:///./src/css/icons.css?");
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n    if(true) {\n      // 1615390314731\n      var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ \"./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js\")(module.i, {\"locals\":false});\n      module.hot.dispose(cssReload);\n      module.hot.accept(undefined, cssReload);\n    }\n  \n\n//# sourceURL=webpack:///./src/css/icons.css?");
 
 /***/ }),
 
@@ -6060,6 +6060,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vuex
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  install: function install(Vue) {\n    Vue.directive('preventReClick', {\n      inserted: function inserted(el, binding) {\n        el.addEventListener('click', function () {\n          if (!el.disabled) {\n            el.disabled = true;\n            setTimeout(function () {\n              el.disabled = false;\n            }, binding.value || 1000);\n          }\n        });\n      }\n    });\n  }\n});\n\n//# sourceURL=webpack:///./src/util/preventRepeatClick.js?");
+
+/***/ }),
+
+/***/ "./src/utils/cordovaPlugin.js":
+/*!************************************!*\
+  !*** ./src/utils/cordovaPlugin.js ***!
+  \************************************/
+/*! exports provided: cameraTakePicture */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"cameraTakePicture\", function() { return cameraTakePicture; });\nfunction cameraTakePicture() {\n  navigator.camera.getPicture(onSuccess, onFail, {\n    quality: 50,\n    destinationType: Camera.DestinationType.DATA_URL\n  });\n\n  function onSuccess(imageData) {\n    var image = document.getElementById('myImage');\n    image.src = \"data:image/jpeg;base64,\" + imageData;\n  }\n\n  function onFail(message) {\n    alert('Failed because: ' + message);\n  }\n}\n\n\n\n//# sourceURL=webpack:///./src/utils/cordovaPlugin.js?");
 
 /***/ }),
 
