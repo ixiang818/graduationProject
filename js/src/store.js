@@ -12,7 +12,8 @@ export default new Vuex.Store({
     },
     removeUserToken(state){
       state.userToken = null
-    }
+    },
+
   }
 })
 

@@ -1,19 +1,39 @@
 function cameraTakePicture() {
-    navigator.camera.getPicture(onSuccess, onFail, { 
-       quality: 50,
-       destinationType: Camera.DestinationType.DATA_URL
-    });
- 
-    function onSuccess(imageData) {
-       var image = document.getElementById('myImage');
-       image.src = "data:image/jpeg;base64," + imageData;
-    }
- 
-    function onFail(message) {
-       alert('Failed because: ' + message);
-    }
- }
+   navigator.camera.getPicture(onSuccess, onFail, {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL
+   });
 
- export{
-    cameraTakePicture
- }
+   function onSuccess(imageData) {
+      var image = document.getElementById('myImage');
+      image.src = "data:image/jpeg;base64," + imageData;
+   }
+
+   function onFail(message) {
+      alert('Failed because: ' + message);
+   }
+}
+
+
+function albumGetPicture() {
+   navigator.camera.getPicture(onSuccess, onFail, {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType:Camera.PictureSourceType.PHOTOLIBRARY
+   });
+
+   function onSuccess(imageData) {
+      var image = document.getElementById('myImage');
+      image.src = "data:image/jpeg;base64," + imageData;
+   }
+
+   function onFail(message) {
+      alert('Failed because: ' + message);
+   }
+}
+
+
+export {
+   cameraTakePicture,
+   albumGetPicture,
+}

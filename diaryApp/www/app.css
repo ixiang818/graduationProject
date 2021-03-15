@@ -25544,3 +25544,14 @@ iframe#viAd {
   -webkit-animation-delay: 0.35s !important;
   animation-delay: 0.35s !important;
 }
+
+.swiper-slide {
+  background: #fff;
+  text-align: center;
+  font-size: 4.8vw;
+  line-height: 53.333vw;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+
