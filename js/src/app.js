@@ -18,6 +18,9 @@ import App from './app.vue';
 import store from './store';
 import {post,get,patch,put} from './http/index.js'
 
+import axios from 'axios'
+axios.defaults.baseURL = 'http://127.0.0.1:8888'
+
 //定义全局变量
 Vue.prototype.$post=post;
 Vue.prototype.$get=get;

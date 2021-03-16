@@ -43,7 +43,9 @@ export default {
       this.$f7.sheet.open('.demo-sheet-swipe-to-close')
     },
     logout(){
-      
+      this.$store.commit('removeUserToken')
+      console.log(this.$store.state.userToken)
+      this.$f7router.navigate("/login/");
     },
   },
 };

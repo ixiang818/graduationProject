@@ -11,9 +11,6 @@
     <f7-tabs animated>
       <f7-tab id="tab-1" class="page-content" tab-active>
         <f7-view main url="/display/"></f7-view>
-        <f7-block>
-          <f7-button href="/login/">登录</f7-button>
-        </f7-block>
       </f7-tab>
       <f7-tab id="tab-2" class="page-content">
         <f7-view main url="/user/"></f7-view>

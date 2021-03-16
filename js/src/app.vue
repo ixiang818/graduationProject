@@ -2,7 +2,7 @@
   <!-- App -->
   <f7-app :params="f7params">
     <!-- Main View -->
-    <f7-view id="main-view" url="/" main class="safe-areas"></f7-view>
+    <f7-view id="main-view" url="/login/" main class="safe-areas"></f7-view>
   </f7-app>
 </template>
 

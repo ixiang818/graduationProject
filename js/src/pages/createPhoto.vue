@@ -33,7 +33,8 @@ export default {
       albumGetPicture();
     },
     createPhoto(){
-
+      //
+      this.$f7router.back();
     },
   },
 };

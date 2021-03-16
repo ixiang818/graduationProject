@@ -4,7 +4,7 @@ import Vue from 'vue'
 Vue.use(Vuex);
 export default new Vuex.Store({
   state:{
-    userToken:null
+    userToken:null,
   },
   mutations:{
     initUserToken(state,value){

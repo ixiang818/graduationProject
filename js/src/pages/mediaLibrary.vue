@@ -2,13 +2,11 @@
 <f7-page>
   <f7-navbar title="媒体库" back-link="Back"></f7-navbar>
   <f7-block-title>相片墙</f7-block-title>
-  <f7-swiper navigation :speed="500" :slidesPerView="3" :spaceBetween="20">
-    <f7-swiper-slide>Slide 1</f7-swiper-slide>
-    <f7-swiper-slide>Slide 2</f7-swiper-slide>
-    <f7-swiper-slide>Slide 3</f7-swiper-slide>
-    <f7-swiper-slide>Slide 4</f7-swiper-slide>
-    <f7-swiper-slide>Slide 5</f7-swiper-slide>
-    <f7-swiper-slide>Slide 6</f7-swiper-slide>
+  <f7-swiper navigation :speed="500" pagination scrollbar>
+    <f7-swiper-slide v-for="(item, index) in imgList" :key="index">
+      <img :src="item.img" alt="" width="80%" height="80%">
+      {{item.date}}
+    </f7-swiper-slide>
   </f7-swiper>
   <f7-block></f7-block>
 </f7-page>
@@ -17,7 +15,13 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      imgList:[
+        {img:require('@/assets/png/rabbit.jpg'),date:"3.16"},
+        {img:require('@/assets/png/rabbit.jpg'),date:"3.16"},
+        {img:require('@/assets/png/rabbit.jpg'),date:"3.16"}
+      ]
+    };
   },
 };
 </script>

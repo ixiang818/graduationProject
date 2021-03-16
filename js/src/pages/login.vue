@@ -1,5 +1,12 @@
 <template>
-  <f7-page no-toolbar no-navbar no-swipeback login-screen>
+  <f7-page
+    no-toolbar
+    no-navbar
+    no-swipeback
+    login-screen
+    @page:afterin="onPageAfterIn"
+  >
+    <p align="center" v-if="!successFlag">登录失败，请重新登录</p>
     <f7-login-screen-title>Multimedia Diary</f7-login-screen-title>
     <f7-list form>
       <f7-list-input
@@ -31,11 +38,42 @@ export default {
     return {
       username: "",
       password: "",
+      successFlag: true,
     };
   },
   methods: {
-    signIn() {
-     this.$f7router.navigate('/')
+    onPageAfterIn() {
+      if (this.$store.state.userToken !== null) {
+        this.$f7router.navigate("/");
+      }
+    },
+    async signIn() {
+      try {
+        const res = await this.$post(
+          `/login`,{
+            username:this.username,
+            password:this.password
+          }
+        );
+        // const res = await axios.post("/login", null, {
+        //   params: {
+        //     username: this.username,
+        //     password: this.password,
+        //   },
+        // });
+        console.log(res);
+        if (res.success == true) {
+          //保存token
+          this.$store.commit("initUserToken", res.data.userToken);
+          console.log(this.$store.state.userToken);
+          //导航到home
+          this.$f7router.navigate("/");
+        } else {
+          this.successFlag = false;
+        }
+      } catch (_e) {
+        this.successFlag = false;
+      }
     },
   },
 };

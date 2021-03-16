@@ -69,17 +69,7 @@ export default {
     return {
       searchQuery: '',
       today: new Date(year, month, day),
-      events: [
-        {
-          date: new Date(year, month, day),
-          wether:"Sun",
-          mood:"happy",
-          text:"today is a good day",
-          hours: 12,
-          minutes: 30,
-          color: "#2196f3",
-        },
-      ],
+      events: [],
       eventItems: [],
     };
   },
@@ -89,8 +79,8 @@ export default {
       const currentDate = calendar.value[0];
       const currentEvents = self.events.filter(
         (event) =>
-          event.date.getTime() >= currentDate.getTime() &&
-          event.date.getTime() < currentDate.getTime() + 24 * 60 * 60 * 1000
+          event.date >= currentDate.getTime() &&
+          event.date < currentDate.getTime() + 24 * 60 * 60 * 1000
       );
 
       const eventItems = [];
@@ -110,7 +100,7 @@ export default {
       self.eventItems = eventItems;
     },
 
-    onPageInit(page) {
+    async onPageInit(page) {
       const self = this;
       const monthNames = [
         "January",
@@ -126,6 +116,10 @@ export default {
         "November",
         "December",
       ];
+      const res = await self.$get(`/getevents`);
+      console.log(res)
+      this.events = res.data
+    
       //取数据放events
       self.calendar = f7.calendar.create({
         containerEl: "#calendar",

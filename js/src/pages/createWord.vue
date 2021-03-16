@@ -70,7 +70,8 @@ export default {
       console.log(this.moodActive);
     },
     createWord(){
-
+      //
+      this.$f7router.back();
     }
   },
 };
