@@ -35,8 +35,11 @@
 export default {
   data() {
     return {
-      userName:'Ao'
+      userName:''
     };
+  },
+  mounted(){
+    this.userName = this.$store.state.userName;
   },
   methods: {
     openSheet(){
@@ -45,6 +48,7 @@ export default {
     logout(){
       this.$store.commit('removeUserToken')
       console.log(this.$store.state.userToken)
+      this.$store.commit('removeUserName')
       this.$f7router.navigate("/login/");
     },
   },

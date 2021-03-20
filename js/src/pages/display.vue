@@ -20,45 +20,59 @@
       ></f7-searchbar>
     </f7-navbar>
 
-    <f7-block>
-      <div
-        id="calendar"
-        class="block block-strong no-padding no-margin no-hairline-top"
-      ></div>
-    </f7-block>
+    <div class="list simple-list" v-if="isShowList">
+      <ul>
+        <li
+          v-for="(item, index) in searchItems"
+          :key="index"
+          @click="setYearMonth(item.date)"
+        >
+          {{ item.text }}
+        </li>
+      </ul>
+    </div>
 
-    <f7-list
-      id="calendar-events"
-      class="no-margin no-hairlines no-safe-area-left"
-      media-list
-    >
-      <f7-list-item
-        v-for="(item, index) in eventItems"
-        :key="index"
-        :title="item.wether +' & '+ item.mood"
-        :after="item.time"
-        :text="item.text"
-        swipeout
+    <div v-show="!isShowList">
+      <f7-block>
+        <div
+          id="calendar"
+          class="block block-strong no-padding no-margin no-hairline-top"
+        ></div>
+      </f7-block>
+
+      <f7-list
+        id="calendar-events"
+        class="no-margin no-hairlines no-safe-area-left"
+        media-list
       >
-      <f7-swipeout-actions right>
-        <f7-swipeout-button delete @click="deleteItem">Delete</f7-swipeout-button>
-      </f7-swipeout-actions>
-      </f7-list-item>
+        <f7-list-item
+          v-for="(item, index) in eventItems"
+          :key="index"
+          :title="item.wether + ' & ' + item.mood"
+          :after="item.time"
+          :text="item.text"
+          swipeout
+        >
+          <f7-swipeout-actions right>
+            <f7-swipeout-button color="red" @click="deleteItem(item)"
+              >Delete</f7-swipeout-button
+            >
+          </f7-swipeout-actions>
+        </f7-list-item>
 
-      <f7-list-item v-if="eventItems.length === 0">
-        <template #title>
-          <span class="text-color-gray">今天没有写日记~</span>
-        </template>
-      </f7-list-item>
-
-    </f7-list>
-
+        <f7-list-item v-if="eventItems.length === 0">
+          <template #title>
+            <span class="text-color-gray">今天没有写日记~</span>
+          </template>
+        </f7-list-item>
+      </f7-list>
+    </div>
   </f7-page>
 </template>
 <script>
-import {f7} from "framework7-vue";
+import { f7 } from "framework7-vue";
 import $ from "dom7";
-import UtilsFunctions from '../utils/utils.js';
+import UtilsFunctions from "../utils/utils.js";
 
 export default {
   data() {
@@ -67,10 +81,13 @@ export default {
     const month = date.getMonth();
     const day = date.getDate();
     return {
-      searchQuery: '',
+      isShowList: false,
+      searchQuery: "",
       today: new Date(year, month, day),
       events: [],
       eventItems: [],
+      myCalendar: {},
+      searchItems: [],
     };
   },
   methods: {
@@ -82,7 +99,6 @@ export default {
           event.date >= currentDate.getTime() &&
           event.date < currentDate.getTime() + 24 * 60 * 60 * 1000
       );
-
       const eventItems = [];
       if (currentEvents.length) {
         currentEvents.forEach((event) => {
@@ -90,9 +106,9 @@ export default {
           let minutes = event.minutes;
           if (minutes < 10) minutes = `0${minutes}`;
           eventItems.push({
-            wether:event.wether,
-            mood:event.mood,
-            text:event.text,
+            wether: event.wether,
+            mood: event.mood,
+            text: event.text,
             time: `${hours}:${minutes}`,
           });
         });
@@ -117,11 +133,10 @@ export default {
         "December",
       ];
       const res = await self.$get(`/getevents`);
-      console.log(res)
-      this.events = res.data
-    
-      //取数据放events
-      self.calendar = f7.calendar.create({
+      console.log(res);
+      this.events = res.data;
+
+      self.myCalendar = f7.calendar.create({
         containerEl: "#calendar",
         toolbar: false,
         value: [self.today],
@@ -153,17 +168,66 @@ export default {
       self.calendar.destroy();
     },
 
-    deleteItem(){
-      f7.toast.create({
-          text: '已删除',
-          position: 'center',
-          closeTimeout: 2000,
-        }).open();
+    async deleteItem(item) {
+      const self = this;
+      //根据id从events里面找到索引
+      //下面这个是删19号的
+      self.events.splice(2, 1)
+      self.renderEvents(self.myCalendar)
+      
+      const res = await this.$post(`/deleteWord`, {
+        //找id删
+        text: item.text,
+      });
+      if (res.success == true) {
+        f7.toast
+          .create({
+            text: "已删除",
+            position: "center",
+            closeTimeout: 2000,
+          })
+          .open();
+        //重新加载
+      } else {
+        this.$f7.toast
+          .create({
+            text: "删除失败",
+            position: "center",
+            closeTimeout: 2000,
+          })
+          .open();
+      }
     },
 
-    search: UtilsFunctions.debounce(async function(e){
-     this.searchQuery = e.target.value
-     console.log(this.searchQuery)
+    setYearMonth(value) {
+      const self = this;
+      console.log(value);
+      var date = new Date(value)
+      self.myCalendar.setYearMonth(date.getFullYear(), date.getMonth())
+      self.myCalendar.setValue([date])
+      self.myCalendar.update();
+      self.isShowList = false
+    },
+
+    search: UtilsFunctions.debounce(async function (e) {
+      this.searchQuery = e.target.value;
+      console.log(this.searchQuery);
+      this.isShowList = this.searchQuery.length > 0;
+      const res = await this.$post(`/search`, {
+        searchQuery: this.searchQuery,
+      });
+      if (res.success == true) {
+        console.log(res.data);
+        this.searchItems = res.data;
+      } else {
+        this.$f7.toast
+          .create({
+            text: "搜索失败",
+            position: "center",
+            closeTimeout: 2000,
+          })
+          .open();
+      }
     }, 400),
   },
 };

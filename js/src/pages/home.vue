@@ -13,9 +13,11 @@
         <f7-view main url="/display/"></f7-view>
       </f7-tab>
       <f7-tab id="tab-2" class="page-content">
-        <f7-view main url="/user/"></f7-view>
+        <tab2></tab2>
       </f7-tab>
     </f7-tabs>
+
+
     <f7-fab position="center-bottom" color="blue" text="Create">
       <f7-icon ios="f7:plus" aurora="f7:plus" md="material:add"></f7-icon>
       <f7-icon ios="f7:xmark" aurora="f7:xmark" md="material:close"></f7-icon>
@@ -34,7 +36,10 @@
 
 
 <script>
+import Tab2 from './user'
+
 export default {
+  components: {Tab2,},
   data() {
     return {};
   },

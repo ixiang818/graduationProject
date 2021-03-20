@@ -19,7 +19,7 @@ function albumGetPicture() {
    navigator.camera.getPicture(onSuccess, onFail, {
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL,
-      sourceType:Camera.PictureSourceType.PHOTOLIBRARY
+      sourceType:Camera.PictureSourceType.SAVEDPHOTOALBUM
    });
 
    function onSuccess(imageData) {
@@ -30,6 +30,10 @@ function albumGetPicture() {
    function onFail(message) {
       alert('Failed because: ' + message);
    }
+}
+
+function getPicture(options){
+   navigator.imagePicker.getPictures(options)
 }
 
 

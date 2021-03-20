@@ -66,6 +66,8 @@ export default {
           //保存token
           this.$store.commit("initUserToken", res.data.userToken);
           console.log(this.$store.state.userToken);
+          //保存name
+          this.$store.commit("initUserName", this.username);
           //导航到home
           this.$f7router.navigate("/");
         } else {

@@ -9,6 +9,9 @@
         <f7-col tag="span">
           <f7-button large raised fill @click="getPicture">从相册中选取</f7-button>
         </f7-col>
+        <f7-col tag="span">
+          <f7-button large raised fill @click="getPictureFromImagePicker">从ImagePicker中选取</f7-button>
+        </f7-col>
       </f7-row>
     </f7-block>
 
@@ -31,6 +34,16 @@ export default {
     },
     getPicture(){
       albumGetPicture();
+    },
+    getPictureFromImagePicker(){
+      let options = {maximumImagesCount: 10}
+      navigator.imagePicker.getPictures(options).then((results) => {
+        for(var i =0; i < results.length; i++){
+          alert('Image URL'+results[i])
+        }
+      }, (err)=> {
+        alert('Image URL'+err)
+      })
     },
     createPhoto(){
       //

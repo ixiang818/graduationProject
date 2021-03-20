@@ -1,11 +1,11 @@
 {
   "dev": {
-    "host": "http://shuttlebuspro.bigsqa1.opsmart.cn/api"
+    "host": "http://127.0.0.1:8888"
   },
   "qa": {
-    "host": "http://shuttlebuspro.bigsqa1.opsmart.cn/api"
+    "host": "http://10.0.2.2:8888"
   },
   "prod": {
-    "host": "https://sbp.zh.ooclit.cn/api"
+    "host": "http://10.0.2.2:8888"
   }
 }

@@ -52,6 +52,7 @@ export default {
     const month = date.getMonth();
     const day = date.getDate();
     return {
+      date: date,
       year: year,
       month: month,
       day: day,
@@ -69,9 +70,30 @@ export default {
       this.moodActive = event.target.value;
       console.log(this.moodActive);
     },
-    createWord(){
-      //
-      this.$f7router.back();
+    async createWord(){
+      const res = await this.$post(
+          `/createWord`,{
+            date: new Date().getTime(),
+            wether:this.wetherActive,
+            mood:this.moodActive,
+            text:this.textValue,
+            hours: this.date.getHours(),
+            minutes: this.date.getMinutes(),
+          })
+      if(res.success == true){
+        this.$f7.toast.create({
+          text: '添加成功',
+          position: 'center',
+          closeTimeout: 2000,
+        }).open();
+        this.$f7router.back();
+      }else{
+        this.$f7.toast.create({
+          text: '添加失败',
+          position: 'center',
+          closeTimeout: 2000,
+        }).open();
+      }
     }
   },
 };

@@ -16,7 +16,7 @@ module.exports = {
     './src/app.js'
   ],
   output: {
-    path: resolvePath('www'),
+    path: resolvePath('../diaryApp/www'),
     filename: 'app.js',
     publicPath: ''
   },
@@ -28,7 +28,7 @@ module.exports = {
     }
   },
   devServer: {
-    host: '0.0.0.0',
+    host: '127.0.0.1',
     port: 3000,
     hot: true,
     open: true,

@@ -5,6 +5,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state:{
     userToken:null,
+    userName:''
   },
   mutations:{
     initUserToken(state,value){
@@ -12,6 +13,12 @@ export default new Vuex.Store({
     },
     removeUserToken(state){
       state.userToken = null
+    },
+    initUserName(state,value){
+      state.userName = value
+    },
+    removeUserName(state){
+      state.userName = ''
     },
 
   }
