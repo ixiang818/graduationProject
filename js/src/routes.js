@@ -17,7 +17,7 @@ export default [
   },
   {
     path: '/login/',
-    component: HomePage,
+    component: LoginPage,
   },
   {
     path: '/display/',

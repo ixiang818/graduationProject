@@ -9,41 +9,35 @@
         <f7-col tag="span">
           <f7-button large raised fill @click="getPicture">从相册中选取</f7-button>
         </f7-col>
-        <f7-col tag="span">
-          <f7-button large raised fill @click="getPictureFromImagePicker">从ImagePicker中选取</f7-button>
-        </f7-col>
       </f7-row>
     </f7-block>
 
     <f7-block strong inset>
-      <img id="myImage" />
+      <img id="myImage" :src="myImageCode" style="width:200px" />
       <f7-button raised fill @click="createPhoto">保存</f7-button>
     </f7-block>
   </f7-page>
 </template>
 
 <script>
-import { cameraTakePicture } from "../utils/cordovaPlugin.js";
+import { cameraTakePicture,albumGetPicture } from "../utils/cordovaPlugin.js";
 export default {
   data() {
-    return {};
+    return {
+      myImageCode:''
+    };
   },
   methods: {
     takePicture() {
-      cameraTakePicture();
+      var self = this
+      cameraTakePicture(self.takePictureSuccess);
+    },
+    takePictureSuccess(imageData){
+      var self = this
+      self.myImageCode = "data:image/jpeg;base64," + imageData
     },
     getPicture(){
       albumGetPicture();
-    },
-    getPictureFromImagePicker(){
-      let options = {maximumImagesCount: 10}
-      navigator.imagePicker.getPictures(options).then((results) => {
-        for(var i =0; i < results.length; i++){
-          alert('Image URL'+results[i])
-        }
-      }, (err)=> {
-        alert('Image URL'+err)
-      })
     },
     createPhoto(){
       //
