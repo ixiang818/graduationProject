@@ -49,7 +49,7 @@ export default {
   data() {
     const date = new Date();
     const year = date.getFullYear();
-    const month = date.getMonth();
+    const month = date.getMonth() + 1;
     const day = date.getDate();
     return {
       date: date,
@@ -70,31 +70,36 @@ export default {
       this.moodActive = event.target.value;
       console.log(this.moodActive);
     },
-    async createWord(){
-      const res = await this.$post(
-          `/createWord`,{
-            date: new Date().getTime(),
-            wether:this.wetherActive,
-            mood:this.moodActive,
-            text:this.textValue,
-            hours: this.date.getHours(),
-            minutes: this.date.getMinutes(),
+    async createWord() {
+      if (this.textValue != "") {
+        const res = await this.$post(`/createWord`, {
+          date: new Date().getTime(),
+          wether: this.wetherActive,
+          mood: this.moodActive,
+          text: this.textValue,
+          hours: this.date.getHours(),
+          minutes: this.date.getMinutes(),
+        });
+        if (res.success == true) {
+          this.$f7.toast
+            .create({
+              text: "添加成功",
+              position: "center",
+              closeTimeout: 2000,
+            })
+            .open();
+          this.$f7router.back();
+        }
+      } else {
+        this.$f7.toast
+          .create({
+            text: "请填写文字后再添加",
+            position: "center",
+            closeTimeout: 2000,
           })
-      if(res.success == true){
-        this.$f7.toast.create({
-          text: '添加成功',
-          position: 'center',
-          closeTimeout: 2000,
-        }).open();
-        this.$f7router.back();
-      }else{
-        this.$f7.toast.create({
-          text: '添加失败',
-          position: 'center',
-          closeTimeout: 2000,
-        }).open();
+          .open();
       }
-    }
+    },
   },
 };
 </script>

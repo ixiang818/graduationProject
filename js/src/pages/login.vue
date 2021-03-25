@@ -55,12 +55,6 @@ export default {
             password:this.password
           }
         );
-        // const res = await axios.post("/login", null, {
-        //   params: {
-        //     username: this.username,
-        //     password: this.password,
-        //   },
-        // });
         console.log(res);
         if (res.success == true) {
           //保存token

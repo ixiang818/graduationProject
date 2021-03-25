@@ -47,14 +47,14 @@
       >
         <f7-list-item
           v-for="(item, index) in eventItems"
-          :key="index"
+          :key="item.id"
           :title="item.wether + ' & ' + item.mood"
           :after="item.time"
           :text="item.text"
           swipeout
         >
           <f7-swipeout-actions right>
-            <f7-swipeout-button color="red" @click="deleteItem(item)"
+            <f7-swipeout-button color="red" @click="deleteItem(item, index)"
               >Delete</f7-swipeout-button
             >
           </f7-swipeout-actions>
@@ -106,6 +106,7 @@ export default {
           let minutes = event.minutes;
           if (minutes < 10) minutes = `0${minutes}`;
           eventItems.push({
+            id: event.Id,
             wether: event.wether,
             mood: event.mood,
             text: event.text,
@@ -168,30 +169,21 @@ export default {
       self.calendar.destroy();
     },
 
-    async deleteItem(item) {
+    async deleteItem(item, index) {
       const self = this;
-      //根据id从events里面找到索引
-      //下面这个是删19号的
-      self.events.splice(2, 1)
-      self.renderEvents(self.myCalendar)
-      
+      console.log(item, index);
+
+      self.eventItems.splice(index, 1);
+      // self.events.splice(index, 1);
+      // self.renderEvents(self.myCalendar);
+
       const res = await this.$post(`/deleteWord`, {
-        //找id删
-        text: item.text,
+        id: item.id,
       });
       if (res.success == true) {
         f7.toast
           .create({
             text: "已删除",
-            position: "center",
-            closeTimeout: 2000,
-          })
-          .open();
-        //重新加载
-      } else {
-        this.$f7.toast
-          .create({
-            text: "删除失败",
             position: "center",
             closeTimeout: 2000,
           })
@@ -202,11 +194,11 @@ export default {
     setYearMonth(value) {
       const self = this;
       console.log(value);
-      var date = new Date(value)
-      self.myCalendar.setYearMonth(date.getFullYear(), date.getMonth())
-      self.myCalendar.setValue([date])
+      var date = new Date(value);
+      self.myCalendar.setYearMonth(date.getFullYear(), date.getMonth());
+      self.myCalendar.setValue([date]);
       self.myCalendar.update();
-      self.isShowList = false
+      self.isShowList = false;
     },
 
     search: UtilsFunctions.debounce(async function (e) {
