@@ -46,7 +46,12 @@ export default {
       self.myImageCode = "data:image/jpeg;base64," + imageData;
     },
     getPicture() {
-      albumGetPicture();
+      var self = this;
+      albumGetPicture(self.getPictureSuccess);
+    },
+    getPictureSuccess(imageData){
+      var self = this;
+      self.myImageCode = "data:image/jpeg;base64," + imageData;
     },
     async createPhoto() {
       if (this.myImageCode != ``) {
