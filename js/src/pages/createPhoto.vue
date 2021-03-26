@@ -67,7 +67,7 @@ export default {
               closeTimeout: 2000,
             })
             .open();
-          this.$f7router.back();
+          this.$f7router.navigate("/");
         }
       } else {
         this.$f7.toast

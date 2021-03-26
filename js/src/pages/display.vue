@@ -54,6 +54,9 @@
           swipeout
         >
           <f7-swipeout-actions right>
+            <f7-swipeout-button @click="moreItem(item)"
+              >More</f7-swipeout-button
+            >
             <f7-swipeout-button color="red" @click="deleteItem(item, index)"
               >Delete</f7-swipeout-button
             >
@@ -167,6 +170,20 @@ export default {
     onPageBeforeRemove() {
       const self = this;
       self.calendar.destroy();
+    },
+
+    moreItem(item) {
+      const self = this;
+      console.log(item);
+      self.actions = f7.actions.create({
+        buttons: [
+          {
+            text: item.text,
+            label: true,
+          },
+        ],
+      });
+      self.actions.open();
     },
 
     async deleteItem(item, index) {
