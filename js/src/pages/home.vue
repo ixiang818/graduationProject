@@ -28,7 +28,6 @@
         <f7-fab-button
           ><f7-link href="/createPhoto/">相片</f7-link></f7-fab-button
         >
-        <f7-fab-button>语音</f7-fab-button>
       </f7-fab-buttons>
     </f7-fab>
   </f7-page>

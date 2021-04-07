@@ -15,7 +15,7 @@ function cameraTakePicture(onSuccess) {
 }
 
 
-function albumGetPicture() {
+function albumGetPicture(onSuccess) {
    navigator.camera.getPicture(onSuccess, onFail, {
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL,
@@ -30,10 +30,6 @@ function albumGetPicture() {
    function onFail(message) {
       alert('Failed because: ' + message);
    }
-}
-
-function getPicture(options){
-   navigator.imagePicker.getPictures(options)
 }
 
 
