@@ -143,13 +143,14 @@ export default {
     },
     async createWord() {
       if (this.textValue != "") {
+        let dateTime = new Date();
         const res = await this.$post(`/createWord`, {
-          date: new Date().getTime(),
+          date: dateTime.getTime(),
           wether: this.wetherActive,
           mood: this.moodActive,
           text: this.textValue,
-          hours: this.date.getHours(),
-          minutes: this.date.getMinutes(),
+          hours: dateTime.getHours(),
+          minutes: dateTime.getMinutes(),
         });
         if (res.success == true) {
           this.$f7.toast

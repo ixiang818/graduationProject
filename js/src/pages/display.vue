@@ -216,14 +216,20 @@ export default {
       console.log(item, index);
 
       self.$f7.dialog.confirm('您确定要删除改日记吗', '删除日记', async function () {
-        self.eventItems.splice(index, 1);
         // self.events.splice(index, 1);
         // self.renderEvents(self.myCalendar);
 
-        const res = await this.$post(`/deleteWord`, {
+        const res = await self.$post(`/deleteWord`, {
           id: item.id,
         });
         if (res.success == true) {
+          self.eventItems.splice(index, 1);
+          for (let k = 0; k < self.events.length; k++) {
+            if (self.events[k]['Id'] === item['id']) {
+              self.events.splice(k, 1)
+              break
+            }
+          }
           f7.toast
             .create({
               text: "已删除",
