@@ -76,6 +76,7 @@
 import { f7 } from "framework7-vue";
 import $ from "dom7";
 import UtilsFunctions from "../utils/utils.js";
+import moment from 'moment'
 
 export default {
   data() {
@@ -218,8 +219,10 @@ export default {
     setYearMonth(value) {
       const self = this;
       console.log(value);
-      var date = new Date(value);
-      self.myCalendar.setYearMonth(date.getFullYear(), date.getMonth());
+      let dateTime = new Date(value);
+      let dateTemp = moment(dateTime).format('yyyy-MM-DD')
+      let date = new Date(moment(dateTemp, 'yyyy-MM-DD').valueOf())
+      self.myCalendar.setYearMonth(dateTime.getFullYear(), dateTime.getMonth());
       self.myCalendar.setValue([date]);
       self.myCalendar.update();
       self.isShowList = false;
