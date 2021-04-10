@@ -5,7 +5,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state:{
     userToken:'',
-    userName:'Aoxiangyun'
+    userName:'Aoxiangyun',
+    updateDiary: '',
   },
   mutations:{
     initUserToken(state,value){
@@ -20,7 +21,9 @@ export default new Vuex.Store({
     removeUserName(state){
       state.userName = ''
     },
-
+    setUpdateDiary(state,value){
+      state.updateDiary = value
+    },
   }
 })
 

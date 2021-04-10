@@ -54,8 +54,11 @@
           swipeout
         >
           <f7-swipeout-actions right>
-            <f7-swipeout-button @click="moreItem(item)"
+            <f7-swipeout-button color="#2196f3" @click="moreItem(item)"
               >More</f7-swipeout-button
+            >
+            <f7-swipeout-button color="green" @click="updateItem(item)"
+              >Update</f7-swipeout-button
             >
             <f7-swipeout-button color="red" @click="deleteItem(item, index)"
               >Delete</f7-swipeout-button
@@ -113,6 +116,7 @@ export default {
             if (minutes < 10) minutes = `0${minutes}`;
             eventItems.push({
               id: event.Id,
+              date: event.date,
               wether: event.wether,
               mood: event.mood,
               text: event.text,
@@ -177,7 +181,9 @@ export default {
 
     onPageBeforeRemove() {
       const self = this;
-      self.calendar.destroy();
+      if (self.calendar) {
+        self.calendar.destroy()
+      }
     },
 
     moreItem(item) {
@@ -194,26 +200,39 @@ export default {
       self.actions.open();
     },
 
-    async deleteItem(item, index) {
+    async updateItem(item) {
+      const self = this;
+      console.log(item);
+      this.$store.commit("setUpdateDiary", item);
+      self.$f7router.navigate('/createWord/', {
+        props: {
+          diaryItem: item
+        }
+      })
+    },
+
+    deleteItem(item, index) {
       const self = this;
       console.log(item, index);
 
-      self.eventItems.splice(index, 1);
-      // self.events.splice(index, 1);
-      // self.renderEvents(self.myCalendar);
+      self.$f7.dialog.confirm('您确定要删除改日记吗', '删除日记', async function () {
+        self.eventItems.splice(index, 1);
+        // self.events.splice(index, 1);
+        // self.renderEvents(self.myCalendar);
 
-      const res = await this.$post(`/deleteWord`, {
-        id: item.id,
-      });
-      if (res.success == true) {
-        f7.toast
-          .create({
-            text: "已删除",
-            position: "center",
-            closeTimeout: 2000,
-          })
-          .open();
-      }
+        const res = await this.$post(`/deleteWord`, {
+          id: item.id,
+        });
+        if (res.success == true) {
+          f7.toast
+            .create({
+              text: "已删除",
+              position: "center",
+              closeTimeout: 2000,
+            })
+            .open();
+        }
+      }, null)
     },
 
     setYearMonth(value) {
