@@ -18,7 +18,7 @@
     </f7-tabs>
 
 
-    <f7-fab position="center-bottom" color="blue" text="Create">
+    <f7-fab position="center-bottom" color="blue" text="Create" v-show="!this.$store.state.isUpdatingDiary">
       <f7-icon ios="f7:plus" aurora="f7:plus" md="material:add"></f7-icon>
       <f7-icon ios="f7:xmark" aurora="f7:xmark" md="material:close"></f7-icon>
       <f7-fab-buttons position="top">

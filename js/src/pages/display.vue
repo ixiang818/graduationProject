@@ -1,5 +1,5 @@
 <template>
-  <f7-page @page:beforeremove="onPageBeforeRemove" @page:init="onPageInit">
+  <f7-page @page:beforeremove="onPageBeforeRemove" @page:init="onPageInit" @page:beforein="onPageBeforeIn">
     <f7-navbar no-shadow>
       <f7-nav-title class="navbar-calendar-title"></f7-nav-title>
       <f7-nav-right>
@@ -179,6 +179,10 @@ export default {
       });
     },
 
+    onPageBeforeIn() {
+      this.$store.commit("setIsUpdatingDiary", false);
+    },
+
     onPageBeforeRemove() {
       const self = this;
       if (self.calendar) {
@@ -204,6 +208,7 @@ export default {
       const self = this;
       console.log(item);
       this.$store.commit("setUpdateDiary", item);
+      this.$store.commit("setIsUpdatingDiary", true);
       self.$f7router.navigate('/createWord/', {
         props: {
           diaryItem: item

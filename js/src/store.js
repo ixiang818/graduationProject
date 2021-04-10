@@ -7,6 +7,7 @@ export default new Vuex.Store({
     userToken:'',
     userName:'Aoxiangyun',
     updateDiary: '',
+    isUpdatingDiary: false
   },
   mutations:{
     initUserToken(state,value){
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     setUpdateDiary(state,value){
       state.updateDiary = value
+    },
+    setIsUpdatingDiary(state,value){
+      state.isUpdatingDiary = value
     },
   }
 })
