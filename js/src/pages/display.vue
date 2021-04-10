@@ -96,28 +96,31 @@ export default {
   methods: {
     renderEvents(calendar) {
       const self = this;
-      const currentDate = calendar.value[0];
-      const currentEvents = self.events.filter(
-        (event) =>
-          event.date >= currentDate.getTime() &&
-          event.date < currentDate.getTime() + 24 * 60 * 60 * 1000
-      );
-      const eventItems = [];
-      if (currentEvents.length) {
-        currentEvents.forEach((event) => {
-          const hours = event.hours;
-          let minutes = event.minutes;
-          if (minutes < 10) minutes = `0${minutes}`;
-          eventItems.push({
-            id: event.Id,
-            wether: event.wether,
-            mood: event.mood,
-            text: event.text,
-            time: `${hours}:${minutes}`,
+      var currentDate
+      if (calendar && calendar.value) {
+        currentDate = calendar.value[0];
+        const currentEvents = self.events.filter(
+          (event) =>
+            event.date >= currentDate.getTime() &&
+            event.date < currentDate.getTime() + 24 * 60 * 60 * 1000
+        );
+        const eventItems = [];
+        if (currentEvents.length) {
+          currentEvents.forEach((event) => {
+            const hours = event.hours;
+            let minutes = event.minutes;
+            if (minutes < 10) minutes = `0${minutes}`;
+            eventItems.push({
+              id: event.Id,
+              wether: event.wether,
+              mood: event.mood,
+              text: event.text,
+              time: `${hours}:${minutes}`,
+            });
           });
-        });
+        }
+        self.eventItems = eventItems;
       }
-      self.eventItems = eventItems;
     },
 
     async onPageInit(page) {
@@ -139,7 +142,11 @@ export default {
       const res = await self.$get(`/getevents`);
       console.log(res);
       this.events = res.data;
-
+      for (let i = 0; i < this.events.length; i ++) {
+        let dateTime = new Date(this.events[i]['date']);
+        this.events[i]['date'] = new Date(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDate());
+        this.events[i]['color'] = '#2196f3'
+      }
       self.myCalendar = f7.calendar.create({
         containerEl: "#calendar",
         toolbar: false,
@@ -216,6 +223,7 @@ export default {
       self.myCalendar.setValue([date]);
       self.myCalendar.update();
       self.isShowList = false;
+      self.renderEvents(self.myCalendar)
     },
 
     search: UtilsFunctions.debounce(async function (e) {
